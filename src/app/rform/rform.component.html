@@ -1,0 +1,114 @@
+<h3>Entry Form</h3>
+
+<form [formGroup]="createForm" (ngSubmit)="submit()">
+  <div class="form-group">
+    <label for="id">Id</label>
+    <input type="text" class="form-control" name="id" formControlName="id" />
+    <div
+      class="alert alert-danger"
+      role="alert"
+      *ngIf="(createForm?.controls)['id']?.errors?.NaN"
+    >
+      Not a number. Async.
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input
+      type="text"
+      class="form-control"
+      name="title"
+      formControlName="title"
+    />
+    <div
+      class="alert alert-danger"
+      role="alert"
+      *ngIf="(createForm?.controls)['title']?.errors?.not_ok"
+    >
+      This is not Ok. Async
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description</label>
+    <input
+      type="text"
+      class="form-control"
+      name="description"
+      formControlName="description"
+    />
+
+    <div
+      class="alert alert-danger"
+      role="alert"
+      *ngIf="(createForm?.controls)['description']?.errors?.minlength"
+    >
+      Required length is
+      {{
+        (createForm?.controls)['description'].errors.minlength.requiredLength
+      }}
+      but you have entered:
+      {{ (createForm?.controls)['description'].errors.minlength.actualLength }}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="severity">Severity</label>
+    <select
+      name="severity"
+      id=""
+      class="form-control"
+      formControlName="severity"
+    >
+      <option value="0">High</option>
+      <option value="1">Moderate</option>
+      <option value="2">Low</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="isResolved">Resolved?</label>
+    <input
+      type="checkbox"
+      class="form-control"
+      name="isResolved"
+      formControlName="isResolved"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="createdAt">Created At</label>
+    <input
+      type="date"
+      class="form-control"
+      name="createdAt"
+      formControlName="createdAt"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="comments">Comments</label>
+    <input
+      type="text"
+      class="form-control"
+      name="comments"
+      formControlName="comments"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="user">User</label>
+    <input
+      type="text"
+      class="form-control"
+      name="user"
+      formControlName="user"
+    />
+  </div>
+
+  <button class="btn btn-primary" type="submit" [disabled]="createForm.invalid">
+    Submit
+  </button>
+</form>
+
+<p>{{ createForm.value | json }}</p>

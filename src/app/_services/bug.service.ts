@@ -9,9 +9,24 @@ import { Observable, of } from 'rxjs';
 export class BugService {
   private bugCollection: Bug[] = bugs;
 
+  private severityLevels: string[] = ['High', 'Moderate', 'Low'];
+
   constructor() {}
 
   get bugs(): Observable<Bug[]> {
     return of(this.bugCollection);
+  }
+
+  get severityLabels(): Observable<String[]> {
+    return of(this.severityLevels);
+  }
+
+  create(bug: Bug): Observable<Object> {
+    this.bugCollection.push(bug);
+
+    return of({
+      status: 200,
+      message: 'Success'
+    });
   }
 }
