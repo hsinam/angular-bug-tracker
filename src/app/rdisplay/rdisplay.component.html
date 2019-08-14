@@ -1,0 +1,18 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Title</th>
+      <th>Created On</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let db of detailedBugs$ | async">
+      <td>
+        {{ db.id }}
+      </td>
+      <td>{{ db.title }}</td>
+      <td>{{ db.createdAt | date: 'short' }}</td>
+    </tr>
+  </tbody>
+</table>

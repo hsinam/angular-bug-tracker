@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { DisplayComponent } from './display/display.component';
 import { HomeComponent } from './home/home.component';
 import { TformComponent } from './tform/tform.component';
+import { RformComponent } from './rform/rform.component';
+import { RdisplayComponent } from './rdisplay/rdisplay.component';
 
 const routes: Routes = [
   {
@@ -12,6 +14,14 @@ const routes: Routes = [
   {
     path: 'tform',
     component: TformComponent
+  },
+  {
+    path: 'rform',
+    component: RformComponent
+  },
+  {
+    path: 'rdisplay',
+    component: RdisplayComponent
   },
   {
     path: '**',
