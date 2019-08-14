@@ -2,7 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { RestBugService } from '../rest-bug.service';
 import { DetailedBug } from '../_models/detailed.bug.model';
 import { Observable } from 'rxjs';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  AbstractControl
+} from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-rform',
@@ -12,12 +18,13 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class RformComponent implements OnInit {
   createForm: FormGroup;
 
-  constructor() {
+  constructor(private restService: RestBugService, private router: Router) {
     this.createForm = new FormGroup({
-      title: new FormControl('default Title', [
-        Validators.required,
-        Validators.minLength(5)
-      ]),
+      title: new FormControl(
+        'default Title',
+        [Validators.required, Validators.minLength(5)],
+        [this.validateTitle.bind(this)]
+      ),
       description: new FormControl('default description', [
         Validators.required,
         Validators.minLength(5)
@@ -39,5 +46,26 @@ export class RformComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.createForm);
+  }
+
+  submit() {
+    this.restService.createBug(this.createForm.value).subscribe(
+      response => {
+        console.log('POST', response);
+        this.router.navigate(['rdisplay']);
+      },
+      error => {
+        console.log('Error', error);
+      }
+    );
+  }
+
+  validateTitle(control: AbstractControl): Promise<any> | Observable<any> {
+    return new Promise(resolve => {
+      let title = control.value;
+      setTimeout(() => {
+        resolve({ not_ok: true });
+      }, 2000);
+    });
   }
 }

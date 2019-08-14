@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DetailedBug } from './_models/detailed.bug.model';
 
@@ -12,5 +12,9 @@ export class RestBugService {
 
   getBugs(): Observable<DetailedBug[]> {
     return this.http.get(this.url + 'get') as Observable<DetailedBug[]>;
+  }
+
+  createBug(bug: DetailedBug) {
+    return this.http.post(this.url + 'create', bug);
   }
 }

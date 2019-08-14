@@ -9,6 +9,13 @@
       name="title"
       formControlName="title"
     />
+    <div
+      class="alert alert-danger"
+      role="alert"
+      *ngIf="(createForm?.controls)['title']?.errors?.not_ok"
+    >
+      This is not Ok. Async
+    </div>
   </div>
 
   <div class="form-group">
