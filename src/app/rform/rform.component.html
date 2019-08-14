@@ -19,13 +19,18 @@
       name="description"
       formControlName="description"
     />
+
     <div
       class="alert alert-danger"
       role="alert"
-      *ngIf="desc?.errors?.minlength"
+      *ngIf="(createForm?.controls)['description']?.errors?.minlength"
     >
-      Required length is {{ desc.errors.minlength.requiredLength }} but you have
-      entered: {{ desc.errors.minlength.actualLength }}
+      Required length is
+      {{
+        (createForm?.controls)['description'].errors.minlength.requiredLength
+      }}
+      but you have entered:
+      {{ (createForm?.controls)['description'].errors.minlength.actualLength }}
     </div>
   </div>
 

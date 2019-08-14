@@ -37,5 +37,7 @@ export class RformComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.createForm);
+  }
 }
