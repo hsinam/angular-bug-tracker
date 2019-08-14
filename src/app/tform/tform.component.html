@@ -1,27 +1,55 @@
 <h3>Entry Form</h3>
 
-<form action="">
+<form #f="ngForm">
   <div class="form-group">
     <label for="title">Title</label>
-    <input type="text" class="form-control" name="title" />
+    <input
+      type="text"
+      class="form-control"
+      name="title"
+      [(ngModel)]="bug.title"
+      required
+      minlength="5"
+    />
   </div>
 
   <div class="form-group">
     <label for="description">Description</label>
-    <input type="text" class="form-control" name="description" />
+    <input
+      type="text"
+      class="form-control"
+      name="description"
+      [(ngModel)]="bug.description"
+    />
   </div>
 
   <div class="form-group">
     <label for="severity">Severity</label>
-    <select name="severity" id="" class="form-control">
-      <option value="Option">Option</option>
+    <select
+      name="severity"
+      id=""
+      class="form-control"
+      [(ngModel)]="bug.severity"
+    >
+      <option *ngFor="let label of severityLables$ | async" value="label">{{
+        label
+      }}</option>
     </select>
   </div>
 
   <div class="form-group">
     <label for="isResolved">Resolved?</label>
-    <input type="checkbox" class="form-control" name="isResolved" />
+    <input
+      type="checkbox"
+      class="form-control"
+      name="isResolved"
+      [(ngModel)]="bug.isResolved"
+    />
   </div>
 
-  <button class="btn btn-primary" type="submit">Submit</button>
+  <button class="btn btn-primary" type="submit" [disabled]="f.invalid">
+    Submit
+  </button>
 </form>
+
+<p>{{ f.value | json }}</p>
