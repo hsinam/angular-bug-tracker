@@ -2,6 +2,17 @@
 
 <form [formGroup]="createForm" (ngSubmit)="submit()">
   <div class="form-group">
+    <label for="id">Id</label>
+    <input type="text" class="form-control" name="id" formControlName="id" />
+    <div
+      class="alert alert-danger"
+      role="alert"
+      *ngIf="(createForm?.controls)['id']?.errors?.NaN"
+    >
+      Not a number. Async.
+    </div>
+  </div>
+  <div class="form-group">
     <label for="title">Title</label>
     <input
       type="text"

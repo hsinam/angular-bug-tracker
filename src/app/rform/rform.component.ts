@@ -36,7 +36,11 @@ export class RformComponent implements OnInit {
         Validators.minLength(5)
       ]),
       createdAt: new FormControl(new Date(), [Validators.required]),
-      id: new FormControl(-1, [Validators.required]),
+      id: new FormControl(
+        -1,
+        [Validators.required],
+        [this.validateId.bind(this)]
+      ),
       comments: new FormControl('default comments', [
         Validators.required,
         Validators.minLength(5)
@@ -65,6 +69,18 @@ export class RformComponent implements OnInit {
       let title = control.value;
       setTimeout(() => {
         resolve({ not_ok: true });
+      }, 2000);
+    });
+  }
+
+  validateId(control: AbstractControl): Promise<any> | Observable<any> {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        if (!/[0-9]+/.test(control.value)) {
+          resolve({ NaN: true });
+        } else {
+          resolve(null);
+        }
       }, 2000);
     });
   }
