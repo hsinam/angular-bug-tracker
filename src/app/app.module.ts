@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DisplayComponent } from './display/display.component';
 import { HomeComponent } from './home/home.component';
+import { TformComponent } from './tform/tform.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DisplayComponent,
-    HomeComponent
+    HomeComponent,
+    TformComponent
   ],
   imports: [
     BrowserModule,
