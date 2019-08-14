@@ -1,6 +1,6 @@
 <h3>Entry Form</h3>
 
-<form #f="ngForm">
+<form #f="ngForm" (ngSubmit)="submit()">
   <div class="form-group">
     <label for="title">Title</label>
     <input
@@ -20,7 +20,17 @@
       class="form-control"
       name="description"
       [(ngModel)]="bug.description"
+      minlength="5"
+      #desc="ngModel"
     />
+    <div
+      class="alert alert-danger"
+      role="alert"
+      *ngIf="desc?.errors?.minlength"
+    >
+      Required length is {{ desc.errors.minlength.requiredLength }} but you have
+      entered: {{ desc.errors.minlength.actualLength }}
+    </div>
   </div>
 
   <div class="form-group">
@@ -30,6 +40,7 @@
       id=""
       class="form-control"
       [(ngModel)]="bug.severity"
+      #sev="ngModel"
     >
       <option *ngFor="let label of severityLables$ | async" value="label">{{
         label

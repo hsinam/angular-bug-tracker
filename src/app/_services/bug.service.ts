@@ -20,4 +20,13 @@ export class BugService {
   get severityLabels(): Observable<String[]> {
     return of(this.severityLevels);
   }
+
+  create(bug: Bug): Observable<Object> {
+    this.bugCollection.push(bug);
+
+    return of({
+      status: 200,
+      message: 'Success'
+    });
+  }
 }
